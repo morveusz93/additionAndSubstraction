@@ -136,21 +136,27 @@ class MathsCalc():
             return False
         # if we are adding
         if self.task_type == 'add':
-            task_sum = int(task_parts[0]) + int(task_parts[2])
-            if int(answer_parts[-1]) == task_sum:
-                return True
-            elif int(answer_parts[-1]) + int(answer_parts[-3]) == task_sum:
-                return 'ok'
-            else:
+            try:
+                task_sum = int(task_parts[0]) + int(task_parts[2])
+                if int(answer_parts[-1]) == task_sum:
+                    return True
+                elif int(answer_parts[-1]) + int(answer_parts[-3]) == task_sum:
+                    return 'ok'
+                else:
+                    return False
+            except:
                 return False
         # if we are subs
         else:
-            task_diff = int(task_parts[0]) - int(task_parts[2])
-            if int(answer_parts[-1]) == task_diff:
-                return True
-            elif int(answer_parts[-3]) - int(answer_parts[-1]) == task_diff:
-                return 'ok'
-            else:
+            try:
+                task_diff = int(task_parts[0]) - int(task_parts[2])
+                if int(answer_parts[-1]) == task_diff:
+                    return True
+                elif int(answer_parts[-3]) - int(answer_parts[-1]) == task_diff:
+                    return 'ok'
+                else:
+                    return False
+            except:
                 return False
 
 
@@ -206,6 +212,7 @@ class Game():
                     self.wrongs +=1
                     pygame.time.wait(1000)
                     self.new_window.answer = ''
+
                 self.DrawAll(self.img, self.calc.task)
                 pygame.display.flip()
                 self.new_window.enter_pressed = False
